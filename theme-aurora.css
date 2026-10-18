@@ -5,30 +5,33 @@
    diagramas con pele. El SVG se recolorea sin re-renderizar.
    ============================================================ */
 
-/* ---- Paletas de serie Aurora (8 colores) ----
+/* ---- Paleta de serie Aurora (8 colores) — preset «Aurora» ----
    Marca + acento + tonos derivados del sistema, alternando
    estructura (azules) y acento (naranjas) como manda la doctrina:
-   la marca hace la estructura, el acento marca el dato que importa. */
+   la marca hace la estructura, el acento marca el dato que importa.
+   Adyacentes siempre contrastados: azul / naranja / cian / naranja
+   quemado / azul claro / ámbar / slate / azul profundo.
+   El playground ofrece 4 paletas más (Océano, Brasa, Bosque, Prisma). */
 :root {
-  --pa-serie-1: #2563eb;  /* marca 600 */
+  --pa-serie-1: #2563eb;  /* marca 600 — protagonista */
   --pa-serie-2: #f97316;  /* acento 500 */
-  --pa-serie-3: #1350d7;  /* marca 700 */
-  --pa-serie-4: #ff8c4e;  /* acento 400 */
-  --pa-serie-5: #6b9dff;  /* marca 400 */
-  --pa-serie-6: #cb5a00;  /* acento 600 */
+  --pa-serie-3: #0ea5e9;  /* cian 500 — frío claro */
+  --pa-serie-4: #c2410c;  /* acento 700 — cálido quemado */
+  --pa-serie-5: #60a5fa;  /* marca 400 */
+  --pa-serie-6: #fbbf24;  /* ámbar 400 — cálido claro */
   --pa-serie-7: #64748b;  /* neutro slate */
-  --pa-serie-8: #0ea5e9;  /* info */
+  --pa-serie-8: #1e40af;  /* marca 800 — frío profundo */
 }
 
 [data-nz-theme="dark"] {
-  --pa-serie-1: #6b9dff;
-  --pa-serie-2: #ff8c4e;
-  --pa-serie-3: #417eff;
+  --pa-serie-1: #60a5fa;
+  --pa-serie-2: #fb923c;
+  --pa-serie-3: #7dd3fc;
   --pa-serie-4: #f97316;
-  --pa-serie-5: #dfeaff;
-  --pa-serie-6: #ffddcd;
-  --pa-serie-7: #a9b8cd;
-  --pa-serie-8: #7dd3fc;
+  --pa-serie-5: #93c5fd;
+  --pa-serie-6: #fbbf24;
+  --pa-serie-7: #94a3b8;
+  --pa-serie-8: #bfdbfe;
 }
 
 /* ---- El diagrama vestido de Aurora ---- */

@@ -1,7 +1,7 @@
 /* ============================================================
    PeleAurora — lógica del playground
    pele (Mermaid → SVG) + skin Aurora + panel de personalización.
-   Sin build, sin framework: un fichero, tres secciones.
+   Sin build, sin framework: un fichero, cuatro secciones.
    ============================================================ */
 
 const AURORA_VERSION = 'v9.2.0';
@@ -20,17 +20,23 @@ const I18N = {
     'ctl.radius': 'Radio de esquina', 'ctl.linewidth': 'Grosor de línea',
     'ctl.colors': 'Colores del tema', 'ctl.colorsnote': 'Se aplican al instante. Cambia cualquier color y el diseño es ya tuyo.',
     'ctl.series': 'Series (gráficos y categorías)',
+    'ctl.seriesnote': 'Elige una paleta estudiada o afina los 8 colores a mano.',
     'btn.share': 'Copiar enlace', 'btn.copycss': 'Copiar CSS', 'btn.svg': 'Descargar SVG',
-    'btn.reset': 'Restaurar Aurora', 'btn.exportcss': 'Descargar theme.css',
+    'btn.reset': 'Restaurar Aurora', 'btn.exportcss': 'Exportar mi tema (.css)',
+    'btn.exportcss.hint': 'Te baja un theme.css con tus colores elegidos aquí, listo para usar pele en tu proyecto.',
     'faq.q1': '¿Cómo lo uso en mi proyecto?',
-    'faq.a1': 'npm install pele, enlaza tu theme.css (botón «Descargar theme.css») y llama a mount(). Menos de 10 líneas, sin build.',
+    'faq.a1': 'npm install pele, enlaza los tokens de Aurora y tu theme.css, y llama a mount(). Menos de 10 líneas, sin build.',
+    'faq.a1b': '«Exportar mi tema (.css)» te baja un theme.css con tus colores elegidos aquí, listo para enlazar en tu proyecto con pele.',
     'faq.q2': '¿Qué diagramas soporta?',
-    'faq.a2': 'Todos los de Mermaid 12.1: flowchart, secuencia, gantt, mindmap, pie, XY, kanban, timeline, quadrant, sankey…',
+    'faq.a2': '20 tipos listos como ejemplo: flujo, secuencia, clases, estados, entidad-relación, journey, gantt, tarta, cuadrantes, mapa mental, timeline, XY, sankey, bloques, paquetes, kanban, radar, arquitectura, git y requisitos.',
     'faq.q3': '¿Licencias?',
     'faq.a3': 'pele es MIT (Obsidian), Aurora es el design system de David Antizar. Este playground es MIT.',
-    'status.ok': (ms) => `${ms} ms`, 'status.err': 'Error de sintaxis', 'status.reset': 'Restaurado Aurora', 'status.copied': 'Copiado ✓', 'ready': 'Listo',
+    'status.ok': (ms) => `${ms} ms`, 'status.err': 'Error de sintaxis', 'status.reset': 'Restaurado Aurora',
+    'status.copied': 'Copiado ✓', 'status.preset': 'Paleta aplicada: ', 'ready': 'Listo',
     'color.fg': 'Texto', 'color.line': 'Líneas', 'color.surface': 'Nodos', 'color.surface-alt': 'Subgrafos',
     'color.border': 'Bordes', 'color.accent': 'Acento', 'color.bg': 'Fondo', 'color.critical': 'Crítico',
+    'series.custom': 'A mano',
+    'series.n': (n) => `Serie ${n}`,
   },
   en: {
     'nav.play': 'Playground', 'nav.repo': 'Repo', 'nav.aurora': 'Aurora', 'nav.pele': 'pele',
@@ -44,32 +50,26 @@ const I18N = {
     'ctl.radius': 'Corner radius', 'ctl.linewidth': 'Line width',
     'ctl.colors': 'Theme colors', 'ctl.colorsnote': 'Applied instantly. Change any color and the design is yours.',
     'ctl.series': 'Series (charts & categories)',
+    'ctl.seriesnote': 'Pick a studied palette or fine-tune the 8 colors by hand.',
     'btn.share': 'Copy link', 'btn.copycss': 'Copy CSS', 'btn.svg': 'Download SVG',
-    'btn.reset': 'Reset to Aurora', 'btn.exportcss': 'Download theme.css',
+    'btn.reset': 'Reset to Aurora', 'btn.exportcss': 'Export my theme (.css)',
+    'btn.exportcss.hint': 'Downloads a theme.css with your chosen colors, ready to use pele in your project.',
     'faq.q1': 'How do I use it in my project?',
-    'faq.a1': 'npm install pele, link your theme.css (the «Download theme.css» button) and call mount(). Under 10 lines, no build.',
+    'faq.a1': 'npm install pele, link the Aurora tokens and your theme.css, then call mount(). Under 10 lines, no build.',
+    'faq.a1b': '«Export my theme (.css)» downloads a theme.css with the colors you picked here, ready to link in your pele project.',
     'faq.q2': 'Which diagrams are supported?',
-    'faq.a2': 'All of Mermaid 12.1: flowchart, sequence, gantt, mindmap, pie, XY, kanban, timeline, quadrant, sankey…',
+    'faq.a2': '20 types ready as examples: flow, sequence, class, state, ER, journey, gantt, pie, quadrant, mindmap, timeline, XY, sankey, block, packet, kanban, radar, architecture, git and requirement.',
     'faq.q3': 'Licenses?',
     'faq.a3': 'pele is MIT (Obsidian), Aurora is David Antizar’s design system. This playground is MIT.',
-    'status.ok': (ms) => `${ms} ms`, 'status.err': 'Syntax error', 'status.reset': 'Reset to Aurora', 'status.copied': 'Copied ✓', 'ready': 'Ready',
+    'status.ok': (ms) => `${ms} ms`, 'status.err': 'Syntax error', 'status.reset': 'Reset to Aurora',
+    'status.copied': 'Copied ✓', 'status.preset': 'Palette applied: ', 'ready': 'Ready',
     'color.fg': 'Text', 'color.line': 'Lines', 'color.surface': 'Nodes', 'color.surface-alt': 'Subgraphs',
     'color.border': 'Borders', 'color.accent': 'Accent', 'color.bg': 'Background', 'color.critical': 'Critical',
+    'series.custom': 'Custom',
+    'series.n': (n) => `Series ${n}`,
   }
 };
 let lang = localStorage.getItem('pa-lang') || (navigator.language.startsWith('en') ? 'en' : 'es');
-
-function applyI18n() {
-  const dict = I18N[lang];
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const v = dict[el.dataset.i18n];
-    if (typeof v === 'string') el.textContent = v;
-  });
-  document.documentElement.lang = lang;
-  document.getElementById('btn-es').setAttribute('aria-selected', lang === 'es');
-  document.getElementById('btn-en').setAttribute('aria-selected', lang === 'en');
-  buildColorControls();
-}
 
 /* ---------- 2. Estado del tema (overrides sobre el skin Aurora) ---------- */
 // Cada variable editable: nombre CSS de pele y etiqueta i18n.
@@ -79,7 +79,29 @@ const EDITABLE = [
   ['--pele-border', 'color.border'], ['--pele-accent', 'color.accent'],
   ['--pele-bg', 'color.bg'], ['--pele-critical', 'color.critical'],
 ];
-const SERIES = [1, 2, 3, 4, 5, 6, 7, 8].map(n => [`--pele-series-${n}`, `Series ${n}`]);
+const SERIES_VARS = [1, 2, 3, 4, 5, 6, 7, 8].map(n => `--pele-series-${n}`);
+
+/* Paletas de serie estudiadas (5): light y dark. La primera es la
+   del skin por defecto (azules y naranjas Aurora). Adyacentes siempre
+   contrastadas; nada de tonos gemelos en la misma escala. */
+const SERIES_PRESETS = [
+  { id: 'aurora', es: 'Aurora', en: 'Aurora',
+    light: ['#2563eb', '#f97316', '#0ea5e9', '#c2410c', '#60a5fa', '#fbbf24', '#64748b', '#1e40af'],
+    dark:  ['#60a5fa', '#fb923c', '#7dd3fc', '#f97316', '#93c5fd', '#fbbf24', '#94a3b8', '#bfdbfe'] },
+  { id: 'oceano', es: 'Océano', en: 'Ocean',
+    light: ['#0c4a6e', '#0891b2', '#2563eb', '#06b6d4', '#1d4ed8', '#7dd3fc', '#64748b', '#155e75'],
+    dark:  ['#7dd3fc', '#22d3ee', '#93c5fd', '#67e8f9', '#60a5fa', '#a5f3fc', '#94a3b8', '#38bdf8'] },
+  { id: 'brasa', es: 'Brasa', en: 'Ember',
+    light: ['#ea580c', '#f59e0b', '#dc2626', '#fb923c', '#b45309', '#fca5a5', '#78716c', '#9a3412'],
+    dark:  ['#fb923c', '#fbbf24', '#f87171', '#fdba74', '#d97706', '#fecaca', '#a8a29e', '#f97316'] },
+  { id: 'bosque', es: 'Bosque', en: 'Forest',
+    light: ['#16a34a', '#0d9488', '#4d7c0f', '#34d399', '#065f46', '#a3e635', '#6b7280', '#059669'],
+    dark:  ['#4ade80', '#2dd4bf', '#a3e635', '#6ee7b7', '#34d399', '#d9f99d', '#9ca3af', '#10b981'] },
+  { id: 'prisma', es: 'Prisma', en: 'Prism',
+    light: ['#0072b2', '#d55e00', '#009e73', '#cc79a7', '#56b4e9', '#e69f00', '#6a51a2', '#999999'],
+    dark:  ['#4da3e0', '#f5813c', '#2ec48e', '#e29ac2', '#8ccdf2', '#ffbe33', '#a98fd6', '#c4c4c4'] },
+];
+let presetId = 'aurora';
 
 const overrides = {}; // variable -> color | null (null = heredar de Aurora)
 let theme = localStorage.getItem('pa-theme') || 'light';
@@ -94,7 +116,8 @@ function stageVars() {
   document.body.appendChild(probe);
   const cs = getComputedStyle(probe);
   const out = {};
-  for (const [v] of EDITABLE.concat(SERIES)) out[v] = cs.getPropertyValue(v).trim();
+  for (const [v] of EDITABLE) out[v] = cs.getPropertyValue(v).trim();
+  SERIES_VARS.forEach(v => { out[v] = cs.getPropertyValue(v).trim(); });
   probe.remove();
   return out;
 }
@@ -110,34 +133,94 @@ function liveCssText() {
 
 function applyLive() {
   document.getElementById('live-style').textContent = liveCssText();
-  buildColorControls(); // repintar pickers con el valor efectivo
+}
+
+/* ---- Controles de color: se crean UNA vez y se repintan, nunca se
+   destruyen mientras el usuario arrastra un picker (ese era el fallo). ---- */
+const colorRefs = []; // { input, v }
+
+function refreshColorControls() {
+  // Sonda con el live-style YA aplicado: los pickers muestran el color
+  // que el diagrama está usando de verdad ahora mismo.
+  document.getElementById('live-style').textContent = liveCssText();
+  const resolved = stageVars();
+  for (const ref of colorRefs) {
+    const cur = overrides[ref.v] || resolved[ref.v] || '#888888';
+    ref.input.value = toHex(cur);
+  }
+}
+
+function mkSwatch(parent, v, labelText) {
+  const wrap = document.createElement('label');
+  wrap.className = 'pa-swatch';
+  const input = document.createElement('input');
+  input.type = 'color';
+  const span = document.createElement('span');
+  span.textContent = labelText;
+  span.title = v;
+  input.addEventListener('input', () => {
+    overrides[v] = input.value;
+    if (v.startsWith('--pele-series')) { presetId = '__custom'; updatePresetButtons(); }
+    applyLive();
+  });
+  input.addEventListener('dblclick', () => {
+    delete overrides[v];
+    if (v.startsWith('--pele-series')) { presetId = '__custom'; updatePresetButtons(); }
+    refreshColorControls();
+    applyLive();
+  });
+  wrap.append(input, span);
+  parent.appendChild(wrap);
+  colorRefs.push({ input, v });
 }
 
 function buildColorControls() {
-  // Sonda con el live-style YA aplicado: los pickers deben mostrar
-  // el color que el diagrama está usando de verdad ahora mismo.
-  document.getElementById('live-style').textContent = liveCssText();
-  const resolved = stageVars();
+  colorRefs.length = 0;
   const grid = document.getElementById('colors');
   const series = document.getElementById('series');
   grid.replaceChildren(); series.replaceChildren();
-  const mk = (parent, [v, label]) => {
-    const wrap = document.createElement('label');
-    wrap.className = 'pa-swatch';
-    const input = document.createElement('input');
-    input.type = 'color';
-    const cur = overrides[v] || resolved[v] || '#888888';
-    input.value = toHex(cur);
-    input.addEventListener('input', () => { overrides[v] = input.value; applyLive(); });
-    input.addEventListener('dblclick', () => { delete overrides[v]; applyLive(); });
-    const span = document.createElement('span');
-    span.textContent = I18N[lang][label] || label;
-    span.title = v;
-    wrap.append(input, span);
-    parent.appendChild(wrap);
-  };
-  EDITABLE.forEach(x => mk(grid, x));
-  SERIES.forEach(x => mk(series, x));
+  EDITABLE.forEach(([v, label]) => mkSwatch(grid, v, I18N[lang][label] || label));
+  SERIES_VARS.forEach((v, i) => mkSwatch(series, v, (I18N[lang]['series.n'] || (n => `Series ${n}`))(i + 1)));
+  refreshColorControls();
+}
+
+/* ---- Presets de paleta ---- */
+function updatePresetButtons() {
+  document.querySelectorAll('#preset-group button').forEach(b => {
+    b.setAttribute('aria-selected', b.dataset.preset === presetId);
+  });
+}
+
+function applyPreset(id, opts = {}) {
+  const p = SERIES_PRESETS.find(x => x.id === id);
+  if (!p) return;
+  presetId = id;
+  const cols = theme === 'dark' ? p.dark : p.light;
+  cols.forEach((hex, i) => { overrides[`--pele-series-${i + 1}`] = hex; });
+  updatePresetButtons();
+  refreshColorControls();
+  applyLive();
+  if (!opts.silent) setStatus('brand', I18N[lang]['status.preset'] + (lang === 'es' ? p.es : p.en));
+}
+
+function buildPresetButtons() {
+  const group = document.getElementById('preset-group');
+  group.replaceChildren();
+  SERIES_PRESETS.forEach(p => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.preset = p.id;
+    b.textContent = lang === 'es' ? p.es : p.en;
+    b.addEventListener('click', () => applyPreset(p.id));
+    group.appendChild(b);
+  });
+  const custom = document.createElement('button');
+  custom.type = 'button';
+  custom.dataset.preset = '__custom';
+  custom.textContent = I18N[lang]['series.custom'];
+  custom.addEventListener('click', () => {}); // estado pasivo: se activa al tocar un picker
+  group.appendChild(custom);
+  updatePresetButtons();
 }
 
 function toHex(color) {
@@ -149,17 +232,43 @@ function toHex(color) {
   return '#' + m.slice(1, 4).map(n => (+n).toString(16).padStart(2, '0')).join('');
 }
 
-/* ---------- 3. Ejemplos y render con pele ---------- */
-const EXAMPLES = {
-  es: {
-    'flujo': `flowchart TD
+function applyI18n() {
+  const dict = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = dict[el.dataset.i18n];
+    if (typeof v === 'string') el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    const v = dict[el.dataset.i18nTitle];
+    if (typeof v === 'string') el.title = v;
+  });
+  document.documentElement.lang = lang;
+  document.getElementById('btn-es').setAttribute('aria-selected', lang === 'es');
+  document.getElementById('btn-en').setAttribute('aria-selected', lang === 'en');
+  buildPresetButtons();
+  buildColorControls();
+}
+
+/* ---------- 3. Ejemplos (20 tipos, verificados contra pele) ---------- */
+// [clave, nombre ES, nombre EN, mermaid ES, mermaid EN]
+const EXAMPLE_LIST = [
+  ['flujo', 'Flujo', 'Flow',
+`flowchart LR
   A[Texto Mermaid] --> B{¿Diagrama?}
   B -- Sí --> C[Pele]
   B -- No --> D[mermaid.js]
   C --> E([SVG con diseño Aurora])
   D --> E
   style E stroke:#f97316,stroke-width:2px`,
-    'secuencia': `sequenceDiagram
+`flowchart LR
+  A[Mermaid text] --> B{Diagram?}
+  B -- Yes --> C[Pele]
+  B -- No --> D[mermaid.js]
+  C --> E([SVG dressed in Aurora])
+  D --> E
+  style E stroke:#f97316,stroke-width:2px`],
+  ['secuencia', 'Secuencia', 'Sequence',
+`sequenceDiagram
   participant U as Usuario
   participant P as Playground
   participant Pe as pele
@@ -167,21 +276,123 @@ const EXAMPLES = {
   P->>Pe: mount(texto)
   Pe-->>P: SVG instantáneo
   P-->>U: Diagrama vestido de Aurora`,
-    'tarta': `pie showData
+`sequenceDiagram
+  participant U as User
+  participant P as Playground
+  participant Pe as pele
+  U->>P: Writes Mermaid
+  P->>Pe: mount(text)
+  Pe-->>P: Instant SVG
+  P-->>U: Diagram dressed in Aurora`],
+  ['clases', 'Clases', 'Class',
+`classDiagram
+  class Animal {
+    +String nombre
+    +volar()
+  }
+  Animal <|-- Pato
+  Animal <|-- Pez
+  Pato : +graznar()
+  Pez : +nadar()`,
+`classDiagram
+  class Animal {
+    +String name
+    +fly()
+  }
+  Animal <|-- Duck
+  Animal <|-- Fish
+  Duck : +quack()
+  Fish : +swim()`],
+  ['estados', 'Estados', 'State',
+`stateDiagram-v2
+  [*] --> Borrador
+  Borrador --> Revisando : enviar
+  Revisando --> Publicado : aprobar
+  Revisando --> Borrador : rechazar
+  Publicado --> [*]`,
+`stateDiagram-v2
+  [*] --> Draft
+  Draft --> Review : submit
+  Review --> Published : approve
+  Review --> Draft : reject
+  Published --> [*]`],
+  ['entidad', 'Entidad-Rel.', 'ER',
+`erDiagram
+  CLIENTE ||--o{ PEDIDO : realiza
+  PEDIDO ||--|{ LINEA : contiene
+  PRODUCTO ||--o{ LINEA : aparece`,
+`erDiagram
+  CUSTOMER ||--o{ ORDER : places
+  ORDER ||--|{ LINE : contains
+  PRODUCT ||--o{ LINE : appears`],
+  ['journey', 'Journey', 'Journey',
+`journey
+  title Un día con PeleAurora
+  section Descubrir
+    Llegar a la web: 5: Yo
+    Ver ejemplos: 4: Yo
+  section Crear
+    Escribir Mermaid: 5: Yo
+    Exportar el SVG: 5: Yo, Equipo`,
+`journey
+  title A day with PeleAurora
+  section Discover
+    Land on the site: 5: Me
+    Browse examples: 4: Me
+  section Create
+    Write Mermaid: 5: Me
+    Export the SVG: 5: Me, Team`],
+  ['gantt', 'Gantt', 'Gantt',
+`gantt
+  title Lanzamiento de PeleAurora
+  dateFormat YYYY-MM-DD
+  section Diseño
+  Skin Aurora      :done, a1, 2026-10-16, 2d
+  section Build
+  Playground       :active, b1, after a1, 3d
+  Pages            : b2, after b1, 1d`,
+`gantt
+  title PeleAurora launch
+  dateFormat YYYY-MM-DD
+  section Design
+  Aurora skin      :done, a1, 2026-10-16, 2d
+  section Build
+  Playground       :active, b1, after a1, 3d
+  Pages            : b2, after b1, 1d`],
+  ['tarta', 'Tarta', 'Pie',
+`pie showData
   title Composición del bundle
   "Layouts" : 45
   "Parsers" : 30
   "Textos" : 15
   "Flechas" : 10`,
-    'gantt': `gantt
-  title Lanzamiento de PeleAurora
-  dateFormat YYYY-MM-DD
-  section Diseño
-  Skin Aurora      :done, a1, 2026-10-18, 2d
-  section Build
-  Playground       :active, b1, after a1, 3d
-  Pages            : b2, after b1, 1d`,
-    'mente': `mindmap
+`pie showData
+  title Bundle composition
+  "Layouts" : 45
+  "Parsers" : 30
+  "Texts" : 15
+  "Arrows" : 10`],
+  ['cuadrantes', 'Cuadrantes', 'Quadrant',
+`quadrantChart
+  title Backlog del playground
+  x-axis Bajo esfuerzo --> Alto esfuerzo
+  y-axis Poco impacto --> Mucho impacto
+  quadrant-1 Hazlo ya
+  quadrant-2 Planifica
+  "Más tipos de gráfico": [0.65, 0.9]
+  "Modo oscuro fino": [0.2, 0.6]
+  "Docs de pele": [0.4, 0.35]`,
+`quadrantChart
+  title Playground backlog
+  x-axis Low effort --> High effort
+  y-axis Low impact --> High impact
+  quadrant-1 Do it now
+  quadrant-2 Plan it
+  "More chart types": [0.65, 0.9]
+  "Fine dark mode": [0.2, 0.6]
+  "pele docs": [0.4, 0.35]`],
+  ['mapa', 'Mapa mental', 'Mindmap',
+`mindmap
   root((PeleAurora))
     Veloz
       0.05–0.3 ms
@@ -192,44 +403,7 @@ const EXAMPLES = {
     Libre
       MIT
       Playground online`,
-    'barras': `xychart-beta
-  title "Stars en GitHub"
-  x-axis [oct 1, oct 5, oct 10, oct 15, oct 18]
-  y-axis "Estrellas" 0 --> 60
-  bar [4, 12, 22, 36, 46]
-  line [4, 12, 22, 36, 46]`,
-  },
-  en: {
-    'flow': `flowchart TD
-  A[Mermaid text] --> B{Diagram?}
-  B -- Yes --> C[Pele]
-  B -- No --> D[mermaid.js]
-  C --> E([SVG dressed in Aurora])
-  D --> E
-  style E stroke:#f97316,stroke-width:2px`,
-    'sequence': `sequenceDiagram
-  participant U as User
-  participant P as Playground
-  participant Pe as pele
-  U->>P: Writes Mermaid
-  P->>Pe: mount(text)
-  Pe-->>P: Instant SVG
-  P-->>U: Diagram dressed in Aurora`,
-    'pie': `pie showData
-  title Bundle composition
-  "Layouts" : 45
-  "Parsers" : 30
-  "Texts" : 15
-  "Arrows" : 10`,
-    'gantt': `gantt
-  title PeleAurora launch
-  dateFormat YYYY-MM-DD
-  section Design
-  Aurora skin      :done, a1, 2026-10-18, 2d
-  section Build
-  Playground       :active, b1, after a1, 3d
-  Pages            : b2, after b1, 1d`,
-    'mind': `mindmap
+`mindmap
   root((PeleAurora))
     Fast
       0.05–0.3 ms
@@ -239,15 +413,134 @@ const EXAMPLES = {
       Inter
     Free
       MIT
-      Live playground`,
-    'bars': `xychart-beta
+      Live playground`],
+  ['tiempo', 'Timeline', 'Timeline',
+`timeline
+  title Hoja de ruta
+  Octubre 2026 : Skin Aurora : Playground
+  Noviembre : Exportar PNG : Temas de marca
+  Diciembre : Colección de recetas`,
+`timeline
+  title Roadmap
+  October 2026 : Aurora skin : Playground
+  November : PNG export : Brand themes
+  December : Recipe collection`],
+  ['barras', 'Barras y líneas', 'Bars & line',
+`xychart-beta
+  title "Stars en GitHub"
+  x-axis [oct 1, oct 5, oct 10, oct 15, oct 18]
+  y-axis "Estrellas" 0 --> 60
+  bar [4, 12, 22, 36, 46]
+  line [4, 12, 22, 36, 46]`,
+`xychart-beta
   title "GitHub stars"
   x-axis [oct 1, oct 5, oct 10, oct 15, oct 18]
   y-axis "Stars" 0 --> 60
   bar [4, 12, 22, 36, 46]
-  line [4, 12, 22, 36, 46]`,
+  line [4, 12, 22, 36, 46]`],
+  ['sankey', 'Sankey', 'Sankey',
+`sankey-beta
+  Texto Mermaid,pele,60
+  pele,SVG Aurora,60
+  Tokens Aurora,SVG Aurora,30`,
+`sankey-beta
+  Mermaid text,pele,60
+  pele,Aurora SVG,60
+  Aurora tokens,Aurora SVG,30`],
+  ['bloques', 'Bloques', 'Block',
+`block-beta
+  columns 3
+  a["Editor"] b["pele"] c["SVG"]
+  d["Tokens Aurora"] e["Tu theme.css"] f["Tu web"]`,
+`block-beta
+  columns 3
+  a["Editor"] b["pele"] c["SVG"]
+  d["Aurora tokens"] e["Your theme.css"] f["Your site"]`],
+  ['paquetes', 'Paquetes', 'Packet',
+`packet-beta
+  0-7: "Versión"
+  8-15: "Tipo"
+  16-31: "Longitud"
+  32-63: "Carga útil"`,
+`packet-beta
+  0-7: "Version"
+  8-15: "Type"
+  16-31: "Length"
+  32-63: "Payload"`],
+  ['kanban', 'Kanban', 'Kanban',
+`kanban
+  Hecho
+    Motor pele: [listo]
+  En curso
+    Skin Aurora: [activo]
+    Playground: [activo]
+  Por hacer
+    Exportar PNG: [idea]`,
+`kanban
+  Done
+    pele engine: [ready]
+  In progress
+    Aurora skin: [active]
+    Playground: [active]
+  To do
+    PNG export: [idea]`],
+  ['radar', 'Radar', 'Radar',
+`radar-beta
+  axis v["Veloz"], b["Bello"], l["Ligero"]
+  curve c1["pele"]{v: 95, b: 90, l: 98}
+  curve c2["mermaid.js"]{v: 55, b: 60, l: 35}
+  max 100`,
+`radar-beta
+  axis v["Fast"], b["Pretty"], l["Light"]
+  curve c1["pele"]{v: 95, b: 90, l: 98}
+  curve c2["mermaid.js"]{v: 55, b: 60, l: 35}
+  max 100`],
+  ['arquitectura', 'Arquitectura', 'Architecture',
+`architecture-beta
+  group nube(cloud)[Navegador]
+  service web(server)[Playground] in nube
+  service pele(database)[Motor pele] in nube`,
+`architecture-beta
+  group browser(cloud)[Browser]
+  service web(server)[Playground] in browser
+  service pele(database)[pele engine] in browser`],
+  ['git', 'Git', 'Git',
+`gitGraph
+  commit id: "Skin Aurora"
+  branch playground
+  commit id: "Panel"
+  commit id: "i18n"
+  checkout main
+  merge playground`,
+`gitGraph
+  commit id: "Aurora skin"
+  branch playground
+  commit id: "Panel"
+  commit id: "i18n"
+  checkout main
+  merge playground`],
+  ['requisitos', 'Requisitos', 'Requirement',
+`requirementDiagram
+  requirement rapido {
+    id: 1
+    text: Renderizar en menos de 300 ms
+    risk: low
+    verifymethod: test
   }
-};
+  element playground {
+    type: web
+  }`,
+`requirementDiagram
+  requirement fast {
+    id: 1
+    text: Render in under 300 ms
+    risk: low
+    verifymethod: test
+  }
+  element playground {
+    type: web
+  }`],
+];
 
 const status = document.getElementById('status');
 const srcEl = document.getElementById('src');
@@ -283,21 +576,25 @@ function showError(err) {
   stage.replaceChildren(code);
 }
 
+function currentExample(name) {
+  const ex = EXAMPLE_LIST.find(x => x[0] === name);
+  return lang === 'es' ? ex[3] : ex[4];
+}
+
 function buildExamples() {
   const tabs = document.getElementById('examples');
   tabs.replaceChildren();
-  const names = Object.keys(EXAMPLES[lang]);
-  names.forEach((name, i) => {
+  EXAMPLE_LIST.forEach((ex, i) => {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'nz-tabs__tab' + (i === 0 ? ' is-active' : '');
     b.setAttribute('role', 'tab');
     b.setAttribute('aria-selected', i === 0);
-    b.textContent = name;
+    b.textContent = lang === 'es' ? ex[1] : ex[2];
     b.addEventListener('click', () => {
       tabs.querySelectorAll('.nz-tabs__tab').forEach(x => { x.classList.remove('is-active'); x.setAttribute('aria-selected', 'false'); });
       b.classList.add('is-active'); b.setAttribute('aria-selected', 'true');
-      srcEl.value = EXAMPLES[lang][name];
+      srcEl.value = currentExample(ex[0]);
       renderSource();
     });
     tabs.appendChild(b);
@@ -311,7 +608,10 @@ function setTheme(t) {
   localStorage.setItem('pa-theme', t);
   document.getElementById('btn-light').setAttribute('aria-selected', t === 'light');
   document.getElementById('btn-dark').setAttribute('aria-selected', t === 'dark');
-  buildColorControls();
+  // La paleta activa se re-aplica con los tonos del nuevo tema:
+  // sin esto, los colores elegidos en claro quedan ilegibles en oscuro.
+  if (presetId && presetId !== '__custom') applyPreset(presetId, { silent: true });
+  else refreshColorControls();
 }
 
 function flash(msgKind, msg) {
@@ -350,14 +650,15 @@ function readHash() {
 window.addEventListener('DOMContentLoaded', () => {
   setTheme(theme);
   applyI18n();
-  if (!readHash()) srcEl.value = EXAMPLES[lang][Object.keys(EXAMPLES[lang])[0]];
+  applyPreset('aurora', { silent: true });
+  if (!readHash()) srcEl.value = currentExample(EXAMPLE_LIST[0][0]);
   buildExamples();
   renderSource();
 
   srcEl.addEventListener('input', () => { clearTimeout(srcEl._t); srcEl._t = setTimeout(renderSource, 250); });
 
-  document.getElementById('btn-es').addEventListener('click', () => { lang = 'es'; localStorage.setItem('pa-lang', 'es'); applyI18n(); srcEl.value = EXAMPLES.es['flujo']; buildExamples(); renderSource(); });
-  document.getElementById('btn-en').addEventListener('click', () => { lang = 'en'; localStorage.setItem('pa-lang', 'en'); applyI18n(); srcEl.value = EXAMPLES.en['flow']; buildExamples(); renderSource(); });
+  document.getElementById('btn-es').addEventListener('click', () => { lang = 'es'; localStorage.setItem('pa-lang', 'es'); applyI18n(); srcEl.value = currentExample('flujo'); buildExamples(); renderSource(); });
+  document.getElementById('btn-en').addEventListener('click', () => { lang = 'en'; localStorage.setItem('pa-lang', 'en'); applyI18n(); srcEl.value = currentExample('flujo'); buildExamples(); renderSource(); });
 
   document.getElementById('btn-light').addEventListener('click', () => setTheme('light'));
   document.getElementById('btn-dark').addEventListener('click', () => setTheme('dark'));
@@ -384,6 +685,9 @@ window.addEventListener('DOMContentLoaded', () => {
     rEl.value = 8; wEl.value = 1.5;
     document.getElementById('radius-out').textContent = '8px';
     document.getElementById('linewidth-out').textContent = '1.5px';
+    presetId = 'aurora';
+    updatePresetButtons();
+    refreshColorControls();
     applyLive();
     setStatus('brand', I18N[lang]['status.reset']);
   });
@@ -403,7 +707,7 @@ function cssExport() {
    Aurora ${AURORA_VERSION} · requiere tokens.css de Aurora (o define los valores a mano) */
 `;
   const eff = Object.assign({}, stageVars(), overrides);
-  const vars = EDITABLE.concat(SERIES)
+  const vars = EDITABLE.concat(SERIES_VARS.map(v => [v]))
     .map(([v]) => `  ${v}: ${overrides[v] || eff[v]};`)
     .join('\n');
   return `${base}.pele {\n${vars}\n  --pele-radius: ${radius}px;\n}\n\n/* Grosor de trazo (regla local de PeleAurora) */\n.pele {\n  --pa-node-stroke: ${linewidth};\n  --pa-line-width: ${linewidth};\n}\n`;

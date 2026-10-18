@@ -8,6 +8,10 @@ Escribe Mermaid → SVG instantáneo (motor [pele](https://pele.run), 230 kB, ce
 dependencias, 0.05–0.3 ms) vestido con los tokens de Aurora. Edita colores, radio
 de esquina y grosor de línea en el panel derecho y exporta tu `theme.css`.
 
+**20 tipos de diagrama** como ejemplo listo: flujo, secuencia, clases, estados,
+entidad-relación, journey, gantt, tarta, cuadrantes, mapa mental, timeline, XY,
+sankey, bloques, paquetes, kanban, radar, arquitectura, git y requisitos.
+
 ## Uso en tu proyecto
 
 ```html
@@ -36,7 +40,7 @@ Con npm: `npm install pele` y `import { mount } from 'pele'`.
 | `--pele-accent` | `--nz-brand` |
 | `--pele-radius` | `--nz-radius-sm` |
 | `--pele-font` | `--nz-font` (Inter self-hosted) |
-| `--pele-series-1..8` | paleta marca/acento Aurora |
+| `--pele-series-1..8` | paleta «Aurora» (azules y naranjas) |
 
 El SVG referencia variables CSS: cambia el tema (light/dark) y los diagramas se
 recolorean solos, sin re-renderizar.
@@ -44,8 +48,12 @@ recolorean solos, sin re-renderizar.
 ## Personalizar
 
 En el playground, doble clic en un color-picker lo devuelve al valor de Aurora.
-«Descargar theme.css» te da el bloque `.pele { … }` exacto con tu tema.
-Comparte tu obra con «Copiar enlace» (la fuente viaja en el hash, como en pele.run).
+Las **series** (gráficos y categorías) tienen 5 paletas estudiadas — Aurora
+(azul+naranja, por defecto), Océano, Brasa, Bosque y Prisma (daltonismo-safe) —
+cada una con versión light y dark; también puedes afinar los 8 colores a mano.
+«Exportar mi tema (.css)» te da el bloque `.pele { … }` exacto con tu tema,
+listo para enlazar en tu proyecto con pele. Comparte tu obra con «Copiar
+enlace» (la fuente viaja en el hash, como en pele.run).
 
 ## Idiomas
 

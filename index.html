@@ -55,7 +55,7 @@
       </div>
       <label class="nz-visually-hidden" for="src" data-i18n="editor.label">Texto del diagrama</label>
       <textarea id="src" class="nz-textarea pa-src" rows="14" spellcheck="false"></textarea>
-      <div class="nz-tabs nz-tabs--pill nz-tabs--scroll pa-examples" role="tablist" id="examples"></div>
+      <div class="nz-tabs pa-examples" role="tablist" id="examples"></div>
       <div class="pa-actions">
         <button type="button" class="nz-btn nz-btn--primary nz-btn--sm" id="btn-share" data-i18n="btn.share">Copiar enlace</button>
         <button type="button" class="nz-btn nz-btn--soft nz-btn--sm" id="btn-copycss" data-i18n="btn.copycss">Copiar CSS</button>
@@ -115,7 +115,9 @@
       <div class="pa-divisor"></div>
 
       <p class="nz-field__label" data-i18n="ctl.series">Series (gráficos y categorías)</p>
-      <div class="pa-colors" id="series"></div>
+      <p class="nz-text--small pa-note" data-i18n="ctl.seriesnote">Elige una paleta estudiada o afina los 8 colores a mano.</p>
+      <div class="nz-segmented nz-segmented--full pa-presets" role="group" id="preset-group" aria-label="Paleta de series"></div>
+      <div class="pa-colors pa-colors--series" id="series"></div>
     </div>
 
   </section>
@@ -123,11 +125,12 @@
   <section class="nz-thirds pa-faq">
     <div class="nz-stack nz-stack--xs">
       <h3 class="nz-h3" data-i18n="faq.q1">¿Cómo lo uso en mi proyecto?</h3>
-      <p class="nz-text--small" data-i18n="faq.a1">npm install pele, enlaza tu theme.css (botón «Descargar theme.css» abajo) y llama a mount(). Menos de 10 líneas, sin build.</p>
+      <p class="nz-text--small" data-i18n="faq.a1">npm install pele, enlaza los tokens de Aurora y tu theme.css, y llama a mount(). Menos de 10 líneas, sin build.</p>
+      <p class="nz-text--small" data-i18n="faq.a1b">«Exportar mi tema (.css)» te baja un theme.css con tus colores elegidos aquí, listo para enlazar en tu proyecto con pele.</p>
     </div>
     <div class="nz-stack nz-stack--xs">
       <h3 class="nz-h3" data-i18n="faq.q2">¿Qué diagramas soporta?</h3>
-      <p class="nz-text--small" data-i18n="faq.a2">Todos los de Mermaid 12.1: flowchart, secuencia, gantt, mindmap, pie, XY, kanban, timeline, quadrant, sankey…</p>
+      <p class="nz-text--small" data-i18n="faq.a2">20 tipos listos como ejemplo: flujo, secuencia, clases, estados, entidad-relación, journey, gantt, tarta, cuadrantes, mapa mental, timeline, XY, sankey, bloques, paquetes, kanban, radar, arquitectura, git y requisitos.</p>
     </div>
     <div class="nz-stack nz-stack--xs">
       <h3 class="nz-h3" data-i18n="faq.q3">¿Licencias?</h3>
@@ -136,7 +139,7 @@
   </section>
 
   <div class="pa-actions pa-actions--end">
-    <button type="button" class="nz-btn nz-btn--accent nz-btn--sm" id="btn-exportcss" data-i18n="btn.exportcss">Descargar theme.css</button>
+    <button type="button" class="nz-btn nz-btn--accent nz-btn--sm" id="btn-exportcss" data-i18n="btn.exportcss" data-i18n-title="btn.exportcss.hint">Exportar mi tema (.css)</button>
   </div>
 
 </main>

@@ -4,13 +4,44 @@
    geometría de la herramienta (rejilla, alturas, controles).
    ============================================================ */
 
+/* ---- Herramienta de una vista: el main llena el viewport ----
+   header + footer viven fuera; el main reparte el resto y el
+   playground crece (flex: 1) para no dejar hueco muerto en PC.
+   En escritorio grande la fila del playground pasa a altura fija
+   de viewport y cada panel scrollea por dentro (patrón inspector). */
+main.nz-container--app {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - 10rem); /* header (~3.5rem) + footer (~2.5rem) + aire */
+}
+@media (min-width: 1280px) {
+  main.nz-container--app { min-height: 0; }
+}
+
+/* ---- Intro compacta: titular y entrada lado a lado en PC ---- */
+.pa-intro {
+  display: grid;
+  gap: var(--nz-space-3);
+  margin-block: var(--nz-space-4) var(--nz-space-4);
+}
+@media (min-width: 960px) {
+  .pa-intro {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: end;
+    gap: var(--nz-space-6);
+  }
+  .pa-intro .nz-lead { margin: 0; }
+}
+
 /* ---- Rejilla del playground: editor | lienzo | controles ----
-   Mobile-first: una columna; 3 columnas reales desde 1200px. */
+   Mobile-first: una columna; 3 columnas reales desde 1200px.
+   align-items: stretch para que las tarjetas compartan altura. */
 .pa-cols {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--nz-space-4);
-  align-items: start;
+  align-items: stretch;
+  flex: 1;
 }
 @media (min-width: 960px) {
   .pa-cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
@@ -21,35 +52,73 @@
   .pa-col--controls { grid-column: auto; }
 }
 
-.pa-panel { display: flex; flex-direction: column; gap: var(--nz-space-3); }
+.pa-panel { display: flex; flex-direction: column; gap: var(--nz-space-3); min-height: 0; }
 .pa-panel-head { display: flex; align-items: center; justify-content: space-between; gap: var(--nz-space-3); flex-wrap: wrap; }
 .pa-panel-title { font-size: var(--nz-text-lg); margin: 0; }
 .pa-note { color: var(--nz-text-mute); margin: 0; }
+
+/* El inspector (panel derecho) capado al viewport con scroll propio:
+   sin esto, sus 16 pickers estiran editor y lienzo a 1400px.
+   En escritorio grande la fila entera tiene altura de viewport y los
+   tres paneles scrollean por dentro, como en Figma o DevTools. */
+@media (min-width: 1280px) {
+  .pa-cols {
+    height: max(24rem, calc(100dvh - 34rem));
+    flex: none;
+  }
+  .pa-col--editor,
+  .pa-col--canvas,
+  .pa-col--controls {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
 
 .pa-src {
   font-family: var(--nz-font-mono);
   font-size: var(--nz-text-sm);
   line-height: 1.5;
   resize: vertical;
-  min-height: 12rem;
+  min-height: 10rem;
+  flex: 1;
 }
 
 .pa-examples { margin: 0; }
 
 .pa-actions { display: flex; flex-wrap: wrap; gap: var(--nz-space-2); }
-.pa-actions--end { justify-content: flex-end; margin: var(--nz-space-4) 0 var(--nz-space-6); }
+.pa-actions--end { justify-content: flex-end; margin: var(--nz-space-3) 0 var(--nz-space-4); }
 
-/* ---- Lienzo ---- */
+/* ---- Lienzo: llena su tarjeta y centra el diagrama ---- */
 .pa-stage-wrap {
   background: var(--nz-bg-soft);
   border: var(--nz-border-w) solid var(--nz-border);
   border-radius: var(--nz-radius-md);
   padding: var(--nz-space-4);
-  min-height: 20rem;
+  min-height: 16rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
 }
-#stage { display: flex; justify-content: center; }
-#stage svg { max-width: 100%; height: auto; }
-.pa-grow { min-height: 24rem; }
+#stage { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+/* Fit puro (como pele.run): el diagrama SIEMPRE entero, centrado y
+   sin deformar. La cadena de alturas viene definida por la fila del
+   playground en escritorio; en pantallas estrechas limita el ancho. */
+#stage svg {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+.pa-grow { min-height: 20rem; }
+
+/* Presets de paleta: 6 botones no caben en el inspector de 20rem.
+   Los segmented del inspector envuelven: «Píldora» se cortaba. */
+.pa-presets,
+.pa-col--controls .nz-segmented {
+  flex-wrap: wrap;
+}
 
 /* ---- Panel de controles ---- */
 .pa-divisor { border-block-start: var(--nz-border-w) solid var(--nz-border-soft); margin: var(--nz-space-2) 0; }
@@ -59,6 +128,7 @@
   grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
   gap: var(--nz-space-2);
 }
+.pa-colors--series { grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr)); }
 .pa-swatch {
   display: flex;
   align-items: center;
@@ -84,8 +154,8 @@
   min-width: 0;
 }
 
-.pa-faq { margin-block-start: var(--nz-space-6); }
-.pa-intro { margin-block: var(--nz-space-4) var(--nz-space-5); }
+/* ---- FAQ pegada al playground, sin hueco muerto ---- */
+.pa-faq { margin-block-start: var(--nz-space-5); }
 
 .pa-error {
   color: var(--nz-danger);
