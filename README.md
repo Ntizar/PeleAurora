@@ -8,9 +8,10 @@ Escribe Mermaid → SVG instantáneo (motor [pele](https://pele.run), 230 kB, ce
 dependencias, 0.05–0.3 ms) vestido con los tokens de Aurora. Edita colores, radio
 de esquina y grosor de línea en el panel derecho y exporta tu `theme.css`.
 
-**20 tipos de diagrama** como ejemplo listo: flujo, secuencia, clases, estados,
+**26 tipos de diagrama** como ejemplo listo: flujo, secuencia, clases, estados,
 entidad-relación, journey, gantt, tarta, cuadrantes, mapa mental, timeline, XY,
-sankey, bloques, paquetes, kanban, radar, arquitectura, git y requisitos.
+sankey, bloques, paquetes, kanban, radar, arquitectura, git, requisitos, C4,
+event modeling, agentflow, cynefin, ishikawa y Wardley.
 
 ## Uso en tu proyecto
 

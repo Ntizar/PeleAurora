@@ -26,6 +26,12 @@ const DESCS = {
   arquitectura: 'Servicios y grupos de infraestructura: cloud, servidores y bases de datos.',
   git: 'Historia de ramas y merges de un repositorio.',
   requisitos: 'Requisitos con riesgo, verificación y elementos del sistema.',
+  c4: 'Modelo C4 nivel componente: contenedores de software y cómo interactúan.',
+  eventos: 'Event modeling: línea de tiempo con UI, comandos y eventos del negocio.',
+  agentflow: 'Flujos de agentes IA: entradas, herramientas y conectores LLM.',
+  cynefin: 'Dominios de decisión Cynefin: complejo, complicado, claro y caótico.',
+  ishikawa: 'Espina de pescado: causas agrupadas por categoría hacia un efecto.',
+  wardley: 'Mapa de Wardley: componentes por evolución y visibilidad para el usuario.',
 };
 
 const fichas = document.getElementById('fichas');

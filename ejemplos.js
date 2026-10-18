@@ -295,4 +295,118 @@ export const EXAMPLE_LIST = [
   element playground {
     type: web
   }`],
+  ['c4', 'C4 (componentes)', 'C4 (components)',
+`C4Component
+title Diagrama de componentes - App
+Container(web, "Aplicación web", "javascript y vue", "Toda la funcionalidad del producto en el navegador.")
+Container(api, "API", "java y spring", "Expone la funcionalidad del producto por API.")
+Rel(web, api, "Usa", "JSON/HTTPS")`,
+`C4Component
+title Component diagram - App
+Container(web, "Web app", "javascript and vue", "All product functionality in the browser.")
+Container(api, "API", "java and spring", "Exposes product functionality over an API.")
+Rel(web, api, "Uses", "JSON/HTTPS")`],
+  ['eventos', 'Event modeling', 'Event modeling',
+`eventmodeling
+
+timeframe 01 ui CarritoUI
+timeframe 02 command AnadirItem [[AnadirItem01]]
+timeframe 03 event ItemAnadido [[ItemAnadido]]
+
+data AnadirItem01 {
+  description: 'john'
+  price: 20.4
+}`,
+`eventmodeling
+
+timeframe 01 ui CartUI
+timeframe 02 command AddItem [[AddItem01]]
+timeframe 03 event ItemAdded [[ItemAdded]]
+
+data AddItem01 {
+  description: 'john'
+  price: 20.4
+}`],
+  ['agentflow', 'Agentflow', 'Agentflow',
+`agentflow-beta TB
+  connector llm["API LLM"]
+  llm@{ protocol: "http", endpoint: "https://api.ejemplo.com/chat" }
+
+  flow equipo_cafe["Equipo de café"]
+    ciudad["ciudad"]@{ shape: input, value: "Estocolmo" }
+
+    flow investigador["Investigador"]
+      buscar["buscar_ubicacion"]@{ shape: tool, params: "ciudad :: String" }
+    end
+  end`,
+`agentflow-beta TB
+  connector llm["LLM API"]
+  llm@{ protocol: "http", endpoint: "https://api.example.com/chat" }
+
+  flow coffee_team["Coffee Team"]
+    city["city"]@{ shape: input, value: "Stockholm" }
+
+    flow researcher["Researcher"]
+      search["search_location"]@{ shape: tool, params: "city :: String" }
+    end
+  end`],
+  ['cynefin', 'Cynefin (dominios)', 'Cynefin (domains)',
+`cynefin-beta
+  title Clasificación de estrategias
+
+  complex
+    "Investigación de mercado"
+
+  complicated
+    "Análisis competitivo"
+
+  clear
+    "Precios estándar"
+
+  complex --> complicated : "Patrón identificado"
+  complicated --> clear : "Práctica codificada"`,
+`cynefin-beta
+  title Strategy Categorization
+
+  complex
+    "Market research"
+
+  complicated
+    "Competitive analysis"
+
+  clear
+    "Standard pricing"
+
+  complex --> complicated : "Pattern identified"
+  complicated --> clear : "Best practice codified"`],
+  ['ishikawa', 'Ishikawa (causa-efecto)', 'Ishikawa (cause-effect)',
+`ishikawa-beta
+    Foto borrosa
+    Proceso
+        Enfoque fuera de plano
+        Obturador demasiado lento
+    Usuario
+        Manos temblorosas
+    Equipo
+        Lente sucio`,
+`ishikawa-beta
+    Blurry Photo
+    Process
+        Out of focus
+        Shutter speed too slow
+    User
+        Shaky hands
+    Equipment
+        Dirty lens`],
+  ['wardley', 'Wardley (mapa)', 'Wardley (map)',
+`wardley-beta
+title Tienda de te
+anchor Cliente [0.95, 0.7]
+component Te [0.8, 0.85]
+component Hervidor [0.62, 0.45]`,
+`wardley-beta
+title Tea shop
+anchor Customer [0.95, 0.7]
+component Tea [0.8, 0.85]
+component Kettle [0.62, 0.45]`],
 ];
