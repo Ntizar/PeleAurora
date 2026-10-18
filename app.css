@@ -1,0 +1,95 @@
+/* ============================================================
+   PeleAurora — estilos locales del playground
+   Todo lo de diseño manda a los tokens --nz-*; aquí solo
+   geometría de la herramienta (rejilla, alturas, controles).
+   ============================================================ */
+
+/* ---- Rejilla del playground: editor | lienzo | controles ----
+   Mobile-first: una columna; 3 columnas reales desde 1200px. */
+.pa-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--nz-space-4);
+  align-items: start;
+}
+@media (min-width: 960px) {
+  .pa-cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); }
+  .pa-col--controls { grid-column: 1 / -1; }
+}
+@media (min-width: 1280px) {
+  .pa-cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) 20rem; }
+  .pa-col--controls { grid-column: auto; }
+}
+
+.pa-panel { display: flex; flex-direction: column; gap: var(--nz-space-3); }
+.pa-panel-head { display: flex; align-items: center; justify-content: space-between; gap: var(--nz-space-3); flex-wrap: wrap; }
+.pa-panel-title { font-size: var(--nz-text-lg); margin: 0; }
+.pa-note { color: var(--nz-text-mute); margin: 0; }
+
+.pa-src {
+  font-family: var(--nz-font-mono);
+  font-size: var(--nz-text-sm);
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 12rem;
+}
+
+.pa-examples { margin: 0; }
+
+.pa-actions { display: flex; flex-wrap: wrap; gap: var(--nz-space-2); }
+.pa-actions--end { justify-content: flex-end; margin: var(--nz-space-4) 0 var(--nz-space-6); }
+
+/* ---- Lienzo ---- */
+.pa-stage-wrap {
+  background: var(--nz-bg-soft);
+  border: var(--nz-border-w) solid var(--nz-border);
+  border-radius: var(--nz-radius-md);
+  padding: var(--nz-space-4);
+  min-height: 20rem;
+}
+#stage { display: flex; justify-content: center; }
+#stage svg { max-width: 100%; height: auto; }
+.pa-grow { min-height: 24rem; }
+
+/* ---- Panel de controles ---- */
+.pa-divisor { border-block-start: var(--nz-border-w) solid var(--nz-border-soft); margin: var(--nz-space-2) 0; }
+
+.pa-colors {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: var(--nz-space-2);
+}
+.pa-swatch {
+  display: flex;
+  align-items: center;
+  gap: var(--nz-space-2);
+  min-height: 44px;
+}
+.pa-swatch input[type="color"] {
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  padding: 0;
+  border: var(--nz-border-w) solid var(--nz-border);
+  border-radius: var(--nz-radius-sm);
+  background: var(--nz-surface);
+  cursor: pointer;
+  flex: none;
+}
+.pa-swatch span {
+  font-size: var(--nz-text-xs);
+  font-weight: var(--nz-peso-fuerte);
+  color: var(--nz-text-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.pa-faq { margin-block-start: var(--nz-space-6); }
+.pa-intro { margin-block: var(--nz-space-4) var(--nz-space-5); }
+
+.pa-error {
+  color: var(--nz-danger);
+  font-family: var(--nz-font-mono);
+  font-size: var(--nz-text-sm);
+  white-space: pre-wrap;
+}

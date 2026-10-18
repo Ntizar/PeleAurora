@@ -1,0 +1,104 @@
+/* ============================================================
+   PeleAurora — skin Aurora para pele (diagramas Mermaid → SVG)
+   Aurora v9.2.0 · mapea las variables --pele-* a los tokens --nz-*
+   Uso: enlaza tokens.css de Aurora + este fichero + tu CSS de
+   diagramas con pele. El SVG se recolorea sin re-renderizar.
+   ============================================================ */
+
+/* ---- Paletas de serie Aurora (8 colores) ----
+   Marca + acento + tonos derivados del sistema, alternando
+   estructura (azules) y acento (naranjas) como manda la doctrina:
+   la marca hace la estructura, el acento marca el dato que importa. */
+:root {
+  --pa-serie-1: #2563eb;  /* marca 600 */
+  --pa-serie-2: #f97316;  /* acento 500 */
+  --pa-serie-3: #1350d7;  /* marca 700 */
+  --pa-serie-4: #ff8c4e;  /* acento 400 */
+  --pa-serie-5: #6b9dff;  /* marca 400 */
+  --pa-serie-6: #cb5a00;  /* acento 600 */
+  --pa-serie-7: #64748b;  /* neutro slate */
+  --pa-serie-8: #0ea5e9;  /* info */
+}
+
+[data-nz-theme="dark"] {
+  --pa-serie-1: #6b9dff;
+  --pa-serie-2: #ff8c4e;
+  --pa-serie-3: #417eff;
+  --pa-serie-4: #f97316;
+  --pa-serie-5: #dfeaff;
+  --pa-serie-6: #ffddcd;
+  --pa-serie-7: #a9b8cd;
+  --pa-serie-8: #7dd3fc;
+}
+
+/* ---- El diagrama vestido de Aurora ---- */
+.pele {
+  /* Superficies y tinta: 1:1 con los tokens del sistema */
+  --pele-bg:          var(--nz-surface);
+  --pele-fg:          var(--nz-text);
+  --pele-muted:       var(--nz-text-mute);
+  --pele-line:        var(--nz-gray-500);
+  --pele-surface:     var(--nz-gray-50);
+  --pele-surface-alt: var(--nz-gray-100);
+  --pele-border:      var(--nz-border-strong);
+  --pele-accent:      var(--nz-brand);
+
+  /* Semántica */
+  --pele-critical:    var(--nz-danger, #e45756);
+
+  /* Tipografía: Inter viaja en tokens.css de Aurora — misma letra
+     en la web, en el diagrama y en las capturas */
+  --pele-font:      var(--nz-font, "Inter", sans-serif);
+  --pele-font-mono: var(--nz-font-mono, ui-monospace, monospace);
+  --pele-title-weight:   var(--nz-peso-titulo, 700);
+  --pele-heading-weight: var(--nz-peso-fuerte, 600);
+  --pele-bold-weight:    var(--nz-peso-fuerte, 600);
+
+  /* Forma: el radio del sistema (sm = 8px) */
+  --pele-radius: var(--nz-radius-sm);
+
+  /* Series */
+  --pele-series-1: var(--pa-serie-1);
+  --pele-series-2: var(--pa-serie-2);
+  --pele-series-3: var(--pa-serie-3);
+  --pele-series-4: var(--pa-serie-4);
+  --pele-series-5: var(--pa-serie-5);
+  --pele-series-6: var(--pa-serie-6);
+  --pele-series-7: var(--pa-serie-7);
+  --pele-series-8: var(--pa-serie-8);
+}
+
+[data-nz-theme="dark"] .pele {
+  --pele-bg:          var(--nz-surface);
+  --pele-fg:          var(--nz-text);
+  --pele-muted:       var(--nz-text-mute);
+  --pele-line:        var(--nz-text-soft);
+  --pele-surface:     var(--nz-bg-soft);
+  --pele-surface-alt: var(--nz-bg-inset);
+  --pele-border:      var(--nz-border-strong);
+  --pele-accent:      var(--nz-brand);
+}
+
+/* ---- Detalles de estilo Aurora sobre el SVG ----
+   Los atributos de presentación del SVG tienen prioridad baja:
+   un selector de una sola clase los gana, como dice la doc de pele. */
+
+/* Nodos: borde de 1.5px como --nz-border-w-strong, relleno plano */
+.pele-node > :is(path, rect, circle, polygon, ellipse) {
+  stroke-width: var(--pa-node-stroke, 1.5);
+}
+
+/* Aristas y flechas */
+.pele-edge :is(path, line, polyline) {
+  stroke-width: var(--pa-line-width, 1.5);
+}
+
+/* Etiquetas de arista en tipografía de datos (12px, sin negrita) */
+.pele-edge-label {
+  font-size: 12px;
+}
+
+/* Subgrafos: surface-alt con borde suave */
+.pele-cluster > :is(rect, path) {
+  stroke-width: var(--pa-node-stroke, 1.5);
+}

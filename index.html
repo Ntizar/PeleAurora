@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es" data-nz-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PeleAurora — diagramas Mermaid con diseño Aurora</title>
+<meta name="description" content="Playground de diagramas Mermaid renderizados a SVG con pele, vestidos con el design system Aurora. Edita colores y formas en vivo.">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<style id="live-style"></style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p1-layout.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p2-navigation.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p3-typography.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p4-actions.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p5-forms.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p6-feedback.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p8-data.css">
+<link rel="stylesheet" href="./theme-aurora.css">
+<link rel="stylesheet" href="./app.css">
+</head>
+<body class="nz">
+
+<header class="nz-navbar">
+  <span class="nz-navbar__brand nz-navbar__brand--lg">
+    <img src="./favicon.svg" alt="" width="24" height="24">
+    PeleAurora
+  </span>
+  <span class="nz-navbar__links">
+    <a href="#playground" class="nz-navbar__link" data-i18n="nav.play">Playground</a>
+    <a href="https://github.com/Ntizar/PeleAurora" class="nz-navbar__link" target="_blank" rel="noopener" data-i18n="nav.repo">Repo</a>
+    <a href="https://ntizar.github.io/Aurora/" class="nz-navbar__link" target="_blank" rel="noopener" data-i18n="nav.aurora">Aurora</a>
+    <a href="https://pele.run" class="nz-navbar__link" target="_blank" rel="noopener" data-i18n="nav.pele">pele</a>
+  </span>
+  <span class="nz-segmented nz-segmented--sm" role="group" aria-label="Idioma / Language">
+    <button type="button" id="btn-es" aria-selected="true">ES</button>
+    <button type="button" id="btn-en" aria-selected="false">EN</button>
+  </span>
+</header>
+
+<main class="nz-container nz-container--app">
+
+  <section class="nz-stack nz-stack--sm pa-intro">
+    <h1 class="nz-h1--brand" data-i18n="hero.title">Diagramas Mermaid con diseño Aurora</h1>
+    <p class="nz-lead" data-i18n="hero.lead">Escribe Mermaid, ve un SVG instantáneo y personaliza colores y formas a la derecha. Motor pele (230 kB, cero dependencias) + design system Aurora. Gratis, open source, sin build.</p>
+  </section>
+
+  <section id="playground" class="pa-cols">
+
+    <div class="nz-article nz-article--bordered pa-panel pa-col--editor">
+      <div class="pa-panel-head">
+        <h2 class="nz-h2 pa-panel-title" data-i18n="editor.title">Fuente Mermaid</h2>
+        <span class="nz-badge nz-badge--neutral" id="status" aria-live="polite">…</span>
+      </div>
+      <label class="nz-visually-hidden" for="src" data-i18n="editor.label">Texto del diagrama</label>
+      <textarea id="src" class="nz-textarea pa-src" rows="14" spellcheck="false"></textarea>
+      <div class="nz-tabs nz-tabs--pill nz-tabs--scroll pa-examples" role="tablist" id="examples"></div>
+      <div class="pa-actions">
+        <button type="button" class="nz-btn nz-btn--primary nz-btn--sm" id="btn-share" data-i18n="btn.share">Copiar enlace</button>
+        <button type="button" class="nz-btn nz-btn--soft nz-btn--sm" id="btn-copycss" data-i18n="btn.copycss">Copiar CSS</button>
+        <button type="button" class="nz-btn nz-btn--soft nz-btn--sm" id="btn-svg" data-i18n="btn.svg">Descargar SVG</button>
+        <button type="button" class="nz-btn nz-btn--ghost nz-btn--sm" id="btn-reset" data-i18n="btn.reset">Restaurar Aurora</button>
+      </div>
+    </div>
+
+    <div class="nz-article nz-article--bordered pa-panel pa-col--canvas pa-grow">
+      <div class="pa-panel-head">
+        <h2 class="nz-h2 pa-panel-title" data-i18n="canvas.title">Lienzo</h2>
+        <span class="nz-text--sm pa-note" data-i18n="canvas.note">Se recolorea sin re-renderizar</span>
+      </div>
+      <div class="nz-table-wrap pa-stage-wrap">
+        <div class="pele" id="stage" aria-label="Diagrama"></div>
+      </div>
+    </div>
+
+    <div class="nz-article nz-article--bordered pa-panel pa-col--controls">
+      <div class="pa-panel-head">
+        <h2 class="nz-h2 pa-panel-title" data-i18n="controls.title">Tema y formas</h2>
+      </div>
+
+      <div class="nz-field">
+        <span class="nz-field__label" data-i18n="ctl.theme">Tema base</span>
+        <div class="nz-segmented nz-segmented--full" role="group">
+          <button type="button" id="btn-light" aria-selected="true" data-i18n="ctl.light">Claro</button>
+          <button type="button" id="btn-dark" aria-selected="false" data-i18n="ctl.dark">Oscuro</button>
+        </div>
+      </div>
+
+      <div class="nz-field">
+        <span class="nz-field__label" data-i18n="ctl.shape">Forma de los nodos</span>
+        <div class="nz-segmented nz-segmented--full" role="group" id="shape-group">
+          <button type="button" data-radius="0" aria-selected="false" data-i18n="shape.square">Cuadrado</button>
+          <button type="button" data-radius="8" aria-selected="true" data-i18n="shape.rounded">Redondeado</button>
+          <button type="button" data-radius="18" aria-selected="false" data-i18n="shape.pill">Píldora</button>
+        </div>
+      </div>
+
+      <div class="nz-field">
+        <label class="nz-field__label" for="radius"><span data-i18n="ctl.radius">Radio de esquina</span> · <span id="radius-out">8px</span></label>
+        <input class="nz-range" type="range" id="radius" min="0" max="24" step="1" value="8">
+      </div>
+
+      <div class="nz-field">
+        <label class="nz-field__label" for="linewidth"><span data-i18n="ctl.linewidth">Grosor de línea</span> · <span id="linewidth-out">1.5px</span></label>
+        <input class="nz-range" type="range" id="linewidth" min="0.5" max="4" step="0.5" value="1.5">
+      </div>
+
+      <div class="pa-divisor"></div>
+
+      <p class="nz-field__label" data-i18n="ctl.colors">Colores del tema</p>
+      <p class="nz-text--sm pa-note" data-i18n="ctl.colorsnote">Se aplican al instante. Cambia cualquier color y el diseño es ya tuyo.</p>
+      <div class="pa-colors" id="colors"></div>
+
+      <div class="pa-divisor"></div>
+
+      <p class="nz-field__label" data-i18n="ctl.series">Series (gráficos y categorías)</p>
+      <div class="pa-colors" id="series"></div>
+    </div>
+
+  </section>
+
+  <section class="nz-thirds pa-faq">
+    <div class="nz-thirds__item">
+      <h3 class="nz-h3" data-i18n="faq.q1">¿Cómo lo uso en mi proyecto?</h3>
+      <p class="nz-text--sm" data-i18n="faq.a1">npm install pele, enlaza tu theme.css (botón «Descargar theme.css» abajo) y llama a mount(). Menos de 10 líneas, sin build.</p>
+    </div>
+    <div class="nz-thirds__item">
+      <h3 class="nz-h3" data-i18n="faq.q2">¿Qué diagramas soporta?</h3>
+      <p class="nz-text--sm" data-i18n="faq.a2">Todos los de Mermaid 12.1: flowchart, secuencia, gantt, mindmap, pie, XY, kanban, timeline, quadrant, sankey…</p>
+    </div>
+    <div class="nz-thirds__item">
+      <h3 class="nz-h3" data-i18n="faq.q3">¿Licencias?</h3>
+      <p class="nz-text--sm" data-i18n="faq.a3">pele es MIT (Obsidian), Aurora es el design system de David Antizar. Este playground es MIT.</p>
+    </div>
+  </section>
+
+  <div class="pa-actions pa-actions--end">
+    <button type="button" class="nz-btn nz-btn--accent nz-btn--sm" id="btn-exportcss" data-i18n="btn.exportcss">Descargar theme.css</button>
+  </div>
+
+</main>
+
+<footer class="nz-footer nz-footer--compact">
+  Hecho con ❤️ por David Antizar
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/pele@1.6.0/dist/pele.global.js"></script>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
