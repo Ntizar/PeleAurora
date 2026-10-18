@@ -6,7 +6,6 @@
 <title>PeleAurora — diagramas Mermaid con diseño Aurora</title>
 <meta name="description" content="Playground de diagramas Mermaid renderizados a SVG con pele, vestidos con el design system Aurora. Edita colores y formas en vivo.">
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-<style id="live-style"></style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/tokens.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p1-layout.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p2-navigation.css">
@@ -18,6 +17,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p12-system.css">
 <link rel="stylesheet" href="./theme-aurora.css">
 <link rel="stylesheet" href="./app.css">
+<!-- Último del head: misma especificidad .pele que gana por orden de cascada -->
+<style id="live-style"></style>
 </head>
 <body class="nz">
 
