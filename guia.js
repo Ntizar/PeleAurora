@@ -41,6 +41,8 @@ const DESCS = {
   gantt2: 'Hito (milestone), tarea terminada y tarea crítica marcada.',
   tarta2: 'Reparto de un día con más porciones y datos visibles.',
   cuadrantes2: 'Seis puntos y los cuatro cuadrantes nombrados: una shortlist de herramientas.',
+  treemap: 'Jerarquía como rectángulos anidados: el área de cada hoja es proporcional a su valor.',
+  treemap2: 'Con frontmatter y classDef: ramas coloreadas con la paleta de series Aurora.',
   mapa2: 'Raíz circular con ramas y subramas: pele la cuelga en cascada; ideal para lluvias largas.',
   tiempo2: 'Cuatro periodos con varios eventos cada uno.',
   barras2: 'Barras y línea superpuestas en el mismo eje.',

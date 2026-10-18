@@ -293,6 +293,54 @@ export const EXAMPLE_LIST = [
   "Sport" : 60
   "PeleAurora" : 90
   "Sleep" : 570`],
+  ['treemap', 'Treemap', 'Treemap',
+`treemap-beta
+"Sección 1"
+    "Hoja 1.1": 12
+    "Sección 1.2"
+      "Hoja 1.2.1": 12
+"Sección 2"
+    "Hoja 2.1": 20
+    "Hoja 2.2": 25`,
+`treemap-beta
+"Section 1"
+    "Leaf 1.1": 12
+    "Section 1.2"
+      "Leaf 1.2.1": 12
+"Section 2"
+    "Leaf 2.1": 20
+    "Leaf 2.2": 25`],
+  ['treemap2', 'Treemap · Estilos', 'Treemap · Styles',
+`---
+config:
+  treemap:
+    padding: 12
+---
+treemap-beta
+"Marca"
+    "Azul 600": 40:::azul
+    "Acento": 25:::naranja
+"Series"
+    "Océano": 15
+    "Brasa": 10
+    "Bosque": 6
+classDef azul fill:var(--pele-series-1),stroke:var(--pele-series-8),color:#ffffff
+classDef naranja fill:var(--pele-series-2),stroke:var(--pele-series-4),color:#ffffff`,
+`---
+config:
+  treemap:
+    padding: 12
+---
+treemap-beta
+"Brand"
+    "Blue 600": 40:::blue
+    "Accent": 25:::orange
+"Series"
+    "Ocean": 15
+    "Ember": 10
+    "Forest": 6
+classDef blue fill:var(--pele-series-1),stroke:var(--pele-series-8),color:#ffffff
+classDef orange fill:var(--pele-series-2),stroke:var(--pele-series-4),color:#ffffff`],
   ['cuadrantes', 'Cuadrantes', 'Quadrant',
 `quadrantChart
   title Backlog del playground
