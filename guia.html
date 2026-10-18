@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es" data-nz-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía de PeleAurora — de tus datos a un diagrama Aurora</title>
+<meta name="description" content="Cómo incluir tus datos en PeleAurora: sintaxis Mermaid de los 20 tipos de diagrama, personalización de colores y series, exportación e integración en tu proyecto.">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p1-layout.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p2-navigation.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p3-typography.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p4-actions.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p6-feedback.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/packs/p8-data.css">
+<link rel="stylesheet" href="./theme-aurora.css">
+<link rel="stylesheet" href="./guia.css">
+</head>
+<body class="nz">
+
+<header class="nz-navbar">
+  <a class="nz-navbar__brand nz-navbar__brand--lg" href="./index.html" style="text-decoration:none">
+    <img src="./favicon.svg" alt="" width="24" height="24">
+    PeleAurora
+  </a>
+  <span class="nz-navbar__links">
+    <a href="./index.html" class="nz-navbar__link">Playground</a>
+    <a href="https://github.com/Ntizar/PeleAurora" class="nz-navbar__link" target="_blank" rel="noopener">Repo</a>
+    <a href="https://ntizar.github.io/Aurora/" class="nz-navbar__link" target="_blank" rel="noopener">Aurora</a>
+    <a href="https://pele.run" class="nz-navbar__link" target="_blank" rel="noopener">pele</a>
+  </span>
+</header>
+
+<main class="nz-container">
+
+  <section class="nz-stack nz-stack--sm pa-hero">
+    <h1 class="nz-h1--brand">Guía de PeleAurora</h1>
+    <p class="nz-lead">De tus datos a un diagrama vestido de Aurora en tres pasos: escribe Mermaid en el <a href="./index.html">playground</a>, ajusta colores y formas, y exporta. Aquí tienes la sintaxis de los 20 tipos, cómo personalizar y cómo llevarlo a tu proyecto.</p>
+  </section>
+
+  <section class="nz-stack nz-stack--sm">
+    <h2 class="nz-h2">Los tres pasos</h2>
+    <div class="nz-thirds">
+      <div class="nz-article nz-article--bordered nz-stack nz-stack--xs">
+        <span class="nz-badge nz-badge--brand">1 · Escribe</span>
+        <h3 class="nz-h3">Pega o escribe Mermaid</h3>
+        <p class="nz-text--small">En el playground, la caja «Fuente Mermaid» es texto normal: borra el ejemplo y escribe el tuyo. Los chips de arriba cargan un ejemplo de cada tipo — úsalos como plantilla y cambia los textos por tus datos. El diagrama se renderiza al instante, sin botón.</p>
+      </div>
+      <div class="nz-article nz-article--bordered nz-stack nz-stack--xs">
+        <span class="nz-badge nz-badge--accent">2 · Ajusta</span>
+        <h3 class="nz-h3">Vístelo de Aurora</h3>
+        <p class="nz-text--small">En el panel derecho: tema claro u oscuro, forma de los nodos, radio y grosor de línea. Los colores se cambian con el selector y se aplican al instante sin re-renderizar. Las series (tarta, barras, radar, sankey…) usan la paleta que elijas.</p>
+      </div>
+      <div class="nz-article nz-article--bordered nz-stack nz-stack--xs">
+        <span class="nz-badge nz-badge--neutral">3 · Exporta</span>
+        <h3 class="nz-h3">Sácalo del navegador</h3>
+        <p class="nz-text--small">«Descargar SVG» para publicar el diagrama ya vestido. «Copiar enlace» comparte tu diagrama (viaja en la URL). «Exportar mi tema (.css)» te baja tus colores como <code>theme.css</code> para usarlos en tu proyecto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="nz-stack nz-stack--sm" id="tipos">
+    <h2 class="nz-h2">La sintaxis, tipo por tipo</h2>
+    <p class="nz-lead nz-lead--small">Cada ficha trae la plantilla mínima con datos de ejemplo: cámbialos por los tuyos. El botón «Probar» abre el playground con ese diagrama ya cargado.</p>
+    <div class="pa-fichas" id="fichas"></div>
+  </section>
+
+  <section class="nz-stack nz-stack--sm" id="personalizar">
+    <h2 class="nz-h2">Personaliza a tu gusto</h2>
+    <p class="nz-text">Todo el diagrama se pinta con variables CSS <code>--pele-*</code>: el skin <code>theme-aurora.css</code> las mapea a los tokens de Aurora, y los selectores del playground las sobreescriben en vivo. Doble clic sobre un selector devuelve el valor de Aurora.</p>
+    <div class="nz-table-wrap">
+      <table class="nz-table">
+        <thead><tr><th>Variable pele</th><th>Qué pinta en el diagrama</th></tr></thead>
+        <tbody>
+          <tr><td><code>--pele-fg</code></td><td>Texto de nodos y etiquetas</td></tr>
+          <tr><td><code>--pele-line</code></td><td>Líneas y flechas</td></tr>
+          <tr><td><code>--pele-surface</code></td><td>Relleno de los nodos</td></tr>
+          <tr><td><code>--pele-surface-alt</code></td><td>Relleno de subgrafos y secciones</td></tr>
+          <tr><td><code>--pele-border</code></td><td>Bordes de nodos</td></tr>
+          <tr><td><code>--pele-accent</code></td><td>Color de énfasis del tema</td></tr>
+          <tr><td><code>--pele-bg</code></td><td>Fondo del lienzo</td></tr>
+          <tr><td><code>--pele-critical</code></td><td>Estado crítico (errores, alertas)</td></tr>
+          <tr><td><code>--pele-series-1…8</code></td><td>Series: tarta, barras y líneas, radar, sankey, cuadrantes…</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nz-thirds">
+      <div class="nz-stack nz-stack--xs">
+        <h3 class="nz-h3">Las 5 paletas de series</h3>
+        <p class="nz-text--small"><strong>Aurora</strong> (azul + naranja, por defecto), <strong>Océano</strong> (azules), <strong>Brasa</strong> (cálidos), <strong>Bosque</strong> (verdes) y <strong>Prisma</strong> (segura para daltonismo). Cada una trae versión clara y oscura estudiada: al cambiar de tema, la paleta activa se re-aplica con sus tonos. Si retocas un color a mano, el estado pasa a «A mano».</p>
+      </div>
+      <div class="nz-stack nz-stack--xs">
+        <h3 class="nz-h3">Forma y trazo</h3>
+        <p class="nz-text--small">Forma de los nodos (cuadrado, redondeado, píldora), radio de esquina de 0 a 24 px y grosor de línea de 0,5 a 4 px. «Restaurar Aurora» vuelve al tema original de golpe.</p>
+      </div>
+      <div class="nz-stack nz-stack--xs">
+        <h3 class="nz-h3">Exportar y compartir</h3>
+        <p class="nz-text--small">«Exportar mi tema (.css)» genera un <code>theme.css</code> con TODOS tus valores (colores, series y radio) listos para tu proyecto. «Copiar enlace» mete tu Mermaid en la URL — quien la abra ve el diagrama tal como lo dejaste.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="nz-stack nz-stack--sm" id="proyecto">
+    <h2 class="nz-h2">Llévalo a tu proyecto</h2>
+    <p class="nz-text">Menos de 10 líneas, sin build. Enlaza los tokens de Aurora, el skin y pele, y monta el diagrama sobre cualquier <code>&lt;div&gt;</code>:</p>
+    <pre class="pa-code pa-code--grande"><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/tokens.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/PeleAurora@main/theme-aurora.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/pele@1.6.0/dist/pele.global.js"&gt;&lt;/script&gt;
+
+&lt;div class="pele" id="diagrama"&gt;&lt;/div&gt;
+&lt;script&gt;
+  pele.mount(document.querySelector('#diagrama'), `flowchart LR
+  A[Un dato] --> B[Otro dato]`);
+&lt;/script&gt;</code></pre>
+    <p class="nz-text">Con bundler o Node: <code>npm install pele</code> y <code>import { mount } from 'pele'</code>. El SVG resultante referencia las variables CSS, así que cambiar <code>data-nz-theme</code> de claro a oscuro recolorea los diagramas ya montados sin tocarlos.</p>
+  </section>
+
+  <section class="nz-stack nz-stack--sm" id="extender">
+    <h2 class="nz-h2">Añade ejemplos nuevos (para quien toca el repo)</h2>
+    <p class="nz-text">Los 20 ejemplos del playground y de esta guía viven en <code>ejemplos.js</code> — una sola fuente para ambos. Para añadir un tipo, añade una entrada a <code>EXAMPLE_LIST</code>:</p>
+    <pre class="pa-code pa-code--grande"><code>// [clave, nombre ES, nombre EN, mermaid ES, mermaid EN]
+['nuevo', 'Nuevo tipo', 'New type',
+`tipodediagrama
+  Tu ejemplo en castellano`,
+`tipodediagrama
+  Your example in English`],</code></pre>
+    <div class="nz-callout nz-callout--warning">
+      <strong>Límites del motor pele 1.6</strong> — todo lo demás renderiza, pero no soporta las conexiones de <code>architecture-beta</code> (solo grupos y servicios) ni las relaciones <code>- satisfies -</code> de <code>requirementDiagram</code>. Si un ejemplo nuevo da error de sintaxis, simplifícalo a la estructura del bloque y pruébalo antes de pushear.
+    </div>
+    <p class="nz-text--small">Las paletas de series viven en <code>app.js</code> (<code>SERIES_PRESETS</code>) y la de por defecto en <code>theme-aurora.css</code> (<code>--pa-serie-1…8</code>): si añades una, sincroniza ambas.</p>
+  </section>
+
+</main>
+
+<footer class="nz-footer nz-footer--compact">
+  Hecho con ❤️ por David Antizar
+</footer>
+
+<script type="module" src="./guia.js"></script>
+</body>
+</html>

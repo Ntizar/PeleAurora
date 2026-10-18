@@ -2,7 +2,7 @@
 
 Diagramas Mermaid con el diseño de [Aurora](https://github.com/Ntizar/Aurora).
 
-**Playground:** https://ntizar.github.io/PeleAurora/
+**Playground:** https://ntizar.github.io/PeleAurora/ · **Guía:** https://ntizar.github.io/PeleAurora/guia.html
 
 Escribe Mermaid → SVG instantáneo (motor [pele](https://pele.run), 230 kB, cero
 dependencias, 0.05–0.3 ms) vestido con los tokens de Aurora. Edita colores, radio

@@ -1,0 +1,50 @@
+/* ============================================================
+   PeleAurora — guía: geometría local (Aurora pone el resto)
+   ============================================================ */
+
+.pa-hero { margin-top: var(--nz-space-6); }
+
+/* Fichas de la cheatsheet */
+.pa-fichas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+  gap: var(--nz-space-4);
+  align-items: stretch;
+}
+
+.pa-ficha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nz-space-2);
+  margin: 0;
+  min-width: 0; /* el pre con white-space:pre no puede empujar el track del grid */
+}
+
+.pa-ficha .nz-h3 { margin: 0; }
+
+.pa-code {
+  font-family: var(--nz-font-mono);
+  font-size: var(--nz-text-sm);
+  line-height: 1.55;
+  white-space: pre;
+  background: var(--nz-bg-soft);
+  border: 1px solid var(--nz-border);
+  border-radius: var(--nz-radius);
+  padding: var(--nz-space-3);
+  margin: 0;
+  overflow: auto;
+  max-height: 15rem;
+  max-width: 100%;
+}
+
+.pa-code--grande {
+  max-height: none;
+  white-space: pre;
+}
+
+.pa-ficha-acciones {
+  display: flex;
+  gap: var(--nz-space-2);
+  flex-wrap: wrap;
+  margin-top: auto;
+}
