@@ -114,6 +114,9 @@ function applyLive() {
 }
 
 function buildColorControls() {
+  // Sonda con el live-style YA aplicado: los pickers deben mostrar
+  // el color que el diagrama está usando de verdad ahora mismo.
+  document.getElementById('live-style').textContent = liveCssText();
   const resolved = stageVars();
   const grid = document.getElementById('colors');
   const series = document.getElementById('series');
