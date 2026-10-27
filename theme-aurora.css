@@ -1,6 +1,8 @@
 /* ============================================================
    PeleAurora — skin Aurora para pele (diagramas Mermaid → SVG)
-   Aurora v9.2.0 · mapea las variables --pele-* a los tokens --nz-*
+   Aurora v10+ · mapea las variables --pele-* a los tokens --nz-*
+   Marca monocromo (light por defecto, full black en dark) — serie por
+   defecto «Monocromo»: grises de estructura + azul/naranja de señal.
    Uso: enlaza tokens.css de Aurora + este fichero + tu CSS de
    diagramas con pele. El SVG se recolorea sin re-renderizar.
    ============================================================ */
@@ -13,25 +15,27 @@
    quemado / azul claro / ámbar / slate / azul profundo.
    El playground ofrece 4 paletas más (Océano, Brasa, Bosque, Prisma). */
 :root {
-  --pa-serie-1: #2563eb;  /* marca 600 — protagonista */
-  --pa-serie-2: #f97316;  /* acento 500 */
-  --pa-serie-3: #0ea5e9;  /* cian 500 — frío claro */
-  --pa-serie-4: #c2410c;  /* acento 700 — cálido quemado */
-  --pa-serie-5: #60a5fa;  /* marca 400 */
-  --pa-serie-6: #fbbf24;  /* ámbar 400 — cálido claro */
-  --pa-serie-7: #64748b;  /* neutro slate */
-  --pa-serie-8: #1e40af;  /* marca 800 — frío profundo */
+  /* Marca monocromo (Aurora v10.9.0): estructural en grises, señal azul/naranja.
+     Las series 3-8 escalan la tinta para diagramas con muchos niveles. */
+  --pa-serie-1: var(--nz-mono-azul, #2563eb);      /* señal azul — protagonista */
+  --pa-serie-2: var(--nz-mono-naranja, #ea580c);   /* señal naranja — el dato que importa */
+  --pa-serie-3: var(--nz-marca-700, #0b0b0b);      /* tinta profunda */
+  --pa-serie-4: var(--nz-marca-500, #5c5c5c);      /* gris medio */
+  --pa-serie-5: var(--nz-marca-400, #969696);      /* gris claro */
+  --pa-serie-6: var(--nz-marca-200, #e0e0e0);      /* gris muy claro */
+  --pa-serie-7: var(--nz-marca-300, #c2c2c2);      /* gris borde */
+  --pa-serie-8: var(--nz-signal-warning, #d97706); /* ámbar de estado */
 }
 
 [data-nz-theme="dark"] {
-  --pa-serie-1: #60a5fa;
-  --pa-serie-2: #fb923c;
-  --pa-serie-3: #7dd3fc;
-  --pa-serie-4: #f97316;
-  --pa-serie-5: #93c5fd;
-  --pa-serie-6: #fbbf24;
-  --pa-serie-7: #94a3b8;
-  --pa-serie-8: #bfdbfe;
+  --pa-serie-1: var(--nz-mono-azul, #417eff);
+  --pa-serie-2: var(--nz-mono-naranja, #f97316);
+  --pa-serie-3: var(--nz-marca-200, #e0e0e0);
+  --pa-serie-4: var(--nz-marca-400, #969696);
+  --pa-serie-5: var(--nz-marca-300, #c2c2c2);
+  --pa-serie-6: var(--nz-marca-700, #0b0b0b);
+  --pa-serie-7: var(--nz-marca-500, #5c5c5c);
+  --pa-serie-8: var(--nz-signal-warning, #fbbf24);
 }
 
 /* ---- El diagrama vestido de Aurora ---- */

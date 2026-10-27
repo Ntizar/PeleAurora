@@ -17,7 +17,8 @@ tipo trae una plantilla mínima y una variante avanzada (ciclos, subgrafos…).
 ## Uso en tu proyecto
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v9.2.0/tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v10/tokens.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/Aurora@v10/marcas/monocromo.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ntizar/PeleAurora@main/theme-aurora.css">
 <script src="https://cdn.jsdelivr.net/npm/pele@1.6.0/dist/pele.global.js"></script>
 

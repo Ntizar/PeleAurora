@@ -87,6 +87,9 @@ const SERIES_VARS = [1, 2, 3, 4, 5, 6, 7, 8].map(n => `--pele-series-${n}`);
    del skin por defecto (azules y naranjas Aurora). Adyacentes siempre
    contrastadas; nada de tonos gemelos en la misma escala. */
 const SERIES_PRESETS = [
+  { id: 'monocromo', es: 'Monocromo', en: 'Monochrome',
+    light: ['#2563eb', '#ea580c', '#0b0b0b', '#5c5c5c', '#969696', '#e0e0e0', '#c2c2c2', '#d97706'],
+    dark:  ['#417eff', '#f97316', '#e0e0e0', '#969696', '#c2c2c2', '#0b0b0b', '#5c5c5c', '#fbbf24'] },
   { id: 'aurora', es: 'Aurora', en: 'Aurora',
     light: ['#2563eb', '#f97316', '#0ea5e9', '#c2410c', '#60a5fa', '#fbbf24', '#64748b', '#1e40af'],
     dark:  ['#60a5fa', '#fb923c', '#7dd3fc', '#f97316', '#93c5fd', '#fbbf24', '#94a3b8', '#bfdbfe'] },
