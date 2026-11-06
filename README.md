@@ -8,6 +8,32 @@ Escribe Mermaid → SVG instantáneo (motor [pele](https://pele.run), 230 kB, ce
 dependencias, 0.05–0.3 ms) vestido con los tokens de Aurora. Edita colores, radio
 de esquina y grosor de línea en el panel derecho y exporta tu `theme.css`.
 
+## Cómo funciona
+
+Del texto Mermaid al SVG final: todo síncrono en el navegador, sin build.
+
+```mermaid
+flowchart LR
+    A["Tu texto Mermaid"] --> B["Editor del playground<br/>(ES/EN, 54 ejemplos)"]
+    B --> C["Panel derecho<br/>colores · radio · grosor"]
+    C --> D{"¿Doble clic<br/>en un picker?"}
+    D -- "Sí" --> E["Vuelve al token Aurora<br/>(--nz-*)"]
+    D -- "No" --> F["Estilo en vivo<br/>(--pele-*)"]
+    E --> F
+    F --> G["pele.mount()"]
+    G --> H["SVG con Aurora<br/>0.05–0.3 ms"]
+    H --> I{"¿Cómo lo<br/>conservas?"}
+    I -- "Proyecto" --> J["Exportar theme.css<br/>(bloque .pele { ... })"]
+    I -- "Compartir" --> K["Copiar enlace<br/>#source=..."]
+```
+
+ Fuera del playground es igual de directo: enlaza los tres ficheros y llama a
+la API (uso completo en «Uso en tu proyecto», más abajo). Apariencia y color
+viven siempre en los tokens de Aurora — la tabla del skin lo detalla.
+
+El SVG solo referencia variables CSS: cambiar light/dark lo recolorea sin
+re-render.
+
 **27 tipos de diagrama con 54 ejemplos**: flujo, secuencia, clases, estados,
 entidad-relación, journey, gantt, tarta, treemap, cuadrantes, mapa mental,
 timeline, XY, sankey, bloques, paquetes, kanban, radar, arquitectura, git,
